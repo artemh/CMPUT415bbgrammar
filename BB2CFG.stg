@@ -1,0 +1,33 @@
+/*
+CMPUT 415 Assignment 1
+Artem Herasymchuk (herasymc)
+*/
+
+group printer;
+
+Printer(entries, map) ::= <<
+digraph {
+  ordering=out;
+  ranksep=.3;
+  node [shape=circle, fixedsize=false, fontsize=11, fontname="Helvetica-bold",    width=.25, height=.25];
+  edge [arrowsize=.5, color="black"]
+  
+  <if(rest(entries))>
+  <entries:{x | <Entries(entry=(x), list=map.(x))>}>}
+  <elseif(first(entries))>
+  "entry"
+}
+  <else>
+  0
+}
+  <endif>
+>>
+
+Entries(entry, list) ::= <<
+<list:{x | <Entry(entry = entry, pred = (x))>}>
+>>
+
+Entry(entry, pred) ::= <<
+<pred> -> <entry>
+
+>>
